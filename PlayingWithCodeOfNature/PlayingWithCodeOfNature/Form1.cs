@@ -37,13 +37,19 @@ namespace PlayingWithCodeOfNature
                 var currentDnaFitness = population.Fitness(targetPhrase, dna);
                 Debug.Print("Current DNA Fitness: " + currentDnaFitness.ToString());
 
-                int n = (int)population.Fitness(targetPhrase, dna) * 100;
+                int n = (int)(population.Fitness(targetPhrase, dna) * 100);
+                Debug.Print("Current DNA Fitness as n : " + n.ToString());
 
                 for (int j = 0; j < n; j++)
                 {
                     matingpool.Add(dna);
                 }
             }
+
+            // Get New Population
+            var newPop = population.createNewPopulation(matingpool);
+
+
         }
     }
 }

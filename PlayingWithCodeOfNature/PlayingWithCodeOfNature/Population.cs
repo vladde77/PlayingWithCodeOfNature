@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,31 @@ namespace PlayingWithCodeOfNature
             float fitness = score / currentDna.genes.Length;
 
             return fitness;
+        }
+
+
+        public DNA[] createNewPopulation(List<DNA> matingpool)
+        {
+            Random rnd = new Random();
+            DNA[] newPopulation = new DNA[matingpool.Count];
+
+            for(int i = 0; i<matingpool.Count; i++)
+            { 
+                int a = rnd.Next(1, matingpool.Count());
+                int b = rnd.Next(1, matingpool.Count());
+
+                Debug.Print("Random Parent a " + a.ToString());
+                Debug.Print("Random Parent b " + b.ToString());
+
+                DNA parentA = matingpool[a];
+                DNA parentB = matingpool[b];
+                newPopulation[i] = parentA;
+
+            }
+
+            return newPopulation;
+
+
         }
     }
 }
