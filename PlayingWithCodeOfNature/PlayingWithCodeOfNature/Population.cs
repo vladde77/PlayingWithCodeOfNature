@@ -8,16 +8,34 @@ namespace PlayingWithCodeOfNature
 {
     public class Population
     {
-        public DNA[] population = new DNA[100];
+        public DNA[] populationSize;
 
-
-        public Population()
+        public Population(int size)
         {
-            for (int i = 0; i < population.Length; i++)
+            populationSize = new DNA[size];
+
+            for (int i = 0; i < populationSize.Length; i++)
             {
                 // Initializing each member of the population
-                population[i] = new DNA();
+                populationSize[i] = new DNA();
             }
+        }
+
+        public float Fitness(string target, DNA currentDna)
+        {
+            float score = 0;
+
+            for (int i = 0; i < currentDna.genes.Length; i++)
+            {
+                if (currentDna.genes[i] == target[i])
+                {
+                    score++;
+                }
+            }
+
+            float fitness = score / currentDna.genes.Length;
+
+            return fitness;
         }
     }
 }
