@@ -8,11 +8,14 @@ namespace PlayingWithCodeOfNature
 {
     public class DNA
     {
-        public char[] genes = new char[18];
+        public char[] genes;
         private static Random rnd = new Random();
 
-        public DNA()
+        public DNA(int genesLength)
         {
+
+            genes = new char[genesLength];
+
             for (int i = 0; i < genes.Length; i++)
             {
                 // Picking randomly from a range of characters

@@ -21,22 +21,17 @@ namespace PlayingWithCodeOfNature
         private void button1_Click(object sender, EventArgs e)
         {
             int populationSize = 100;
-            Population population = new Population(populationSize);
-            var currentValue = 0;
             string targetPhrase = "To be or not to be";
+            float mutationRate = 0.01f;
+
+            Population population = new Population(populationSize, targetPhrase.Length);
 
             var matingpool = new List<DNA>();
 
-
             foreach (DNA dna in population.populationSize)
             {
-                currentValue++;
-                Debug.Print("Current DNA: " + currentValue.ToString());
-                Debug.Print("Current DNA: " + new string(dna.genes));
 
                 var currentDnaFitness = population.Fitness(targetPhrase, dna);
-                Debug.Print("Current DNA Fitness: " + currentDnaFitness.ToString());
-
                 int n = (int)(population.Fitness(targetPhrase, dna) * 100);
                 Debug.Print("Current DNA Fitness as n : " + n.ToString());
 
@@ -47,7 +42,7 @@ namespace PlayingWithCodeOfNature
             }
 
             // Get New Population
-            var newPop = population.createNewPopulation(matingpool);
+            DNA[] newPop = population.createNewPopulation(matingpool, mutationRate);
 
 
         }
