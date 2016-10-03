@@ -9,26 +9,32 @@ namespace PlayingWithCodeOfNature
 {
     public class Population
     {
-        public DNA[] populationSize;
+        public DNA[] population;
+        public string targetPhrase;
+        public float mutationRate;
+        private static Random rnd = new Random();
 
-        public Population(int size, int genesLength)
+
+        public Population(int size, int genesLength, string targetPhrase, float mutationRate)
         {
-            populationSize = new DNA[size];
+            population = new DNA[size];
+            this.targetPhrase = targetPhrase;
+            this.mutationRate = mutationRate;
 
-            for (int i = 0; i < populationSize.Length; i++)
+            for (int i = 0; i < population.Length; i++)
             {
                 // Initializing each member of the population
-                populationSize[i] = new DNA(genesLength);
+                population[i] = new DNA(genesLength);
             }
         }
 
-        public float Fitness(string target, DNA currentDna)
+        public float Fitness(DNA currentDna)
         {
             float score = 0;
 
             for (int i = 0; i < currentDna.genes.Length; i++)
             {
-                if (currentDna.genes[i] == target[i])
+                if (currentDna.genes[i] == this.targetPhrase[i])
                 {
                     score++;
                 }
@@ -40,12 +46,12 @@ namespace PlayingWithCodeOfNature
         }
 
 
-        public DNA[] createNewPopulation(List<DNA> matingpool, float mutationRate)
+        public DNA[] createNewPopulation(List<DNA> matingpool)
         {
-            Random rnd = new Random();
-            DNA[] newPopulation = new DNA[matingpool.Count];
+            //Random rnd = new Random();
+            DNA[] newPopulation = new DNA[population.Length];
 
-            for(int i = 0; i<matingpool.Count; i++)
+            for(int i = 0; i< population.Length; i++)
             { 
                 int a = rnd.Next(1, matingpool.Count());
                 int b = rnd.Next(1, matingpool.Count());
@@ -54,11 +60,11 @@ namespace PlayingWithCodeOfNature
                 DNA parentB = matingpool[b];
 
                 DNA newChild = crossOver(parentA, parentB);
-                Debug.Print(new string(newChild.genes));
+                //Debug.Print(new string(newChild.genes));
 
-                newChild = mutate(newChild, mutationRate);
+                newChild = mutate(newChild);
 
-                Debug.Print(new string(newChild.genes));
+                //Debug.Print(new string(newChild.genes));
 
                 newPopulation[i] = newChild;
 
@@ -70,7 +76,7 @@ namespace PlayingWithCodeOfNature
 
         private DNA crossOver(DNA parentA, DNA parentB)
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
             DNA childDna = new DNA(parentA.genes.Length);
 
             int midPoint = rnd.Next(parentA.genes.Length);
@@ -86,9 +92,9 @@ namespace PlayingWithCodeOfNature
 
         }
 
-        private DNA mutate(DNA dnaToMutate, float mutationRate)
+        private DNA mutate(DNA dnaToMutate)
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
 
             for (int i = 0; i < dnaToMutate.genes.Length; i++)
             {
