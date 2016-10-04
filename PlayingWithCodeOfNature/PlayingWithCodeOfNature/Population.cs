@@ -60,7 +60,7 @@ namespace PlayingWithCodeOfNature
                 DNA parentB = matingpool[b];
 
                 DNA newChild = crossOver(parentA, parentB);
-                //Debug.Print(new string(newChild.genes));
+                Debug.Print(new string(newChild.genes));
 
                 newChild = mutate(newChild);
 
